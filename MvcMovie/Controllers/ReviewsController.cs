@@ -63,7 +63,7 @@ namespace MvcMovie.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(review);
+            return RedirectToAction("Details","Movies");
         }
 
         // GET: Reviews/Edit/5
