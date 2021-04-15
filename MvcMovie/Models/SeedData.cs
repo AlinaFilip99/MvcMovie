@@ -55,6 +55,21 @@ namespace MvcMovie.Models
                         Price = 3.99M
                     }
                 );
+                context.Review.AddRange(
+                    new Review
+                    {
+                        userName = "Sally",
+                        ReviewDate = DateTime.Parse("1989-2-12"),
+                        Message = "Romantic Comedy"
+                    },
+
+                    new Review
+                    {
+                        userName = "Ghostbusters ",
+                        ReviewDate = DateTime.Parse("1984-3-13"),
+                        Message = "Comedy"
+                    }
+                );
                 context.SaveChanges();
             }
         }
