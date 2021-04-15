@@ -70,6 +70,9 @@ namespace MvcMovie.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var reviews = from m in _context.Review
+                          select m;
+
             if (id == null)
             {
                 return NotFound();
@@ -81,7 +84,12 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
-            return View(movie);
+            var movieReviewVM = new MovieReviewsViewModel
+            {
+                Reviews = await reviews.ToListAsync(),
+                Movie = movie
+            };
+            return View(movieReviewVM);
         }
 
         // GET: Movies/Create
