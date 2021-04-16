@@ -72,4 +72,17 @@
         }
     </tbody>
 </table>
-@Url.Action("Create","Reviews")
+<form asp-action="CreateReview" method="post">
+    <div class="text-danger"></div>
+    <div class="form-group">
+        <label class="control-label">Name:</label>
+        <input type="text" name="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Message:</label>
+        <input type="text" name="Message" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

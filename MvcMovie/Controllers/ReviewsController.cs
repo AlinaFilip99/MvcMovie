@@ -55,8 +55,14 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,userName,ReviewDate,Message")] Review review)
+        public async Task<IActionResult> Create(string UserName, string Message)
         {
+            var review = new Review
+            {
+                Message = Message,
+                userName = UserName,
+                ReviewDate = DateTime.Today
+            };
             if (ModelState.IsValid)
             {
                 _context.Add(review);

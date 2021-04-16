@@ -70,9 +70,7 @@ namespace MvcMovie.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            var reviews = from m in _context.Review
-                          select m;
-
+            
             if (id == null)
             {
                 return NotFound();
@@ -84,12 +82,31 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
+            var reviews = from m in _context.Review
+                          select m;
             var movieReviewVM = new MovieReviewsViewModel
             {
                 Reviews = await reviews.ToListAsync(),
                 Movie = movie
             };
             return View(movieReviewVM);
+        }
+        public async Task<IActionResult> CreateReview(string UserName, string Message)
+        {
+            var review = new Review
+            {
+                Message = Message,
+                userName = UserName,
+                ReviewDate = DateTime.Today
+            };
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
         // GET: Movies/Create
